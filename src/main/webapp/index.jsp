@@ -107,8 +107,36 @@
 			<br/>
             <div class="row">
                 <div class="col-md-12">
-                    <p>
-                                    points!!!
+                                    <%
+                                        Connexion c=new Connexion();
+                                        DB co=c.Co();
+
+                                        DBCollection collection = co.getCollection("utilisateur");
+
+                                        DBObject db = new BasicDBObject();
+                                        db.put("score",-1);
+
+                                        BasicDBObject searchQuery = new BasicDBObject();
+
+                                        DBCursor cursor = collection.find().sort(db);
+                                        User u = new User();
+
+                                        while (cursor.hasNext()){
+                                            DBObject objet=cursor.next();
+                                            u = new User(objet.get("nom").toString(),objet.get("email").toString(),objet.get("mdp").toString(), Integer.parseInt(objet.get("score").toString()));
+                                            break;
+                                        }
+                                    %>
+                                    <h3>Meilleur joueur : 
+                                        <%
+                                            out.println(u.getNom());
+                                        %>
+                                    </h3>
+                                    <p>avec 
+                                    <%
+                                        out.println(u.getScore());
+                                    %>
+                                    points!!
                                     </p>
 
                 </div>
