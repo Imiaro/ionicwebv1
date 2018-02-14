@@ -132,7 +132,7 @@
                                             out.println(u.getNom());
                                         %>
                                     </h3>
-                                    <p> avec 
+                                    <p>avec 
                                     <%
                                         out.println(u.getScore());
                                     %>
